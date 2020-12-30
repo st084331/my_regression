@@ -5,18 +5,17 @@ from sklearn.preprocessing import PolynomialFeatures
 import matplotlib.pyplot as plt
 
 
-n = 10000 # Количество точек
+n = 100 # Количество точек
 x = []
 y = []
 
-for i in range(n):      # Заполняем х и у
-    try:                # Проверка на деление на 0
-        fx = i + 2      # Наша формула, для генерации у
+for i in range(n):        # Заполняем х и у
+    try:                  # Проверка на деление на 0
+        fx = exp(i+12)  # Наша формула, для генерации у
         x.append(i)
         y.append(fx)
     except:
         pass
-
 # Делаем три вида регрессии
 
 X = np.array(x).reshape(-1,1)
@@ -51,21 +50,21 @@ for j in range(len(x)):
     dists1.append(fabs(y_pred1[j] - y[j]))
     dists2.append(fabs(y_pred2[j] - y[j]))
     dists3.append(fabs(y_pred3[j] - y[j]))
-dists = [np.std(dists1), np.std(dists2), np.std(dists3)]   # Находим среднее отклонение от оригинала
+dists = [round(np.std(dists1), 5), round(np.std(dists2), 5), round(np.std(dists3), 5)]   # Находим среднее отклонение от оригинала
 min_dist = float('inf')
 i = 0
 for dist in dists:
     if dist < min_dist:
         min_dist = dist
 for dist in dists:
-    if dist > min_dist - 0.1 and dist < min_dist + 0.1:   # Достаточно хорошим является приблежение с погрешностью 0.01
+    if dist == min_dist:   # Достаточно хорошим является приблежение с погрешностью 0.01
                                                             # относительно самого точного приблежения
         if i == 0:
             print('Линейное приближение достаточно хорошо')
         if i == 1:
             print('Полиномиальное приближение достаточно хорошо')
         if i == 2:
-            print('Экспотенциальное приближение достаточно хорошо')
+            print('Экспоненциальное приближение достаточно хорошо')
     i+=1
 
 # Рисуем красивые графики всех этих приблежений и исходный график
