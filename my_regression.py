@@ -1,5 +1,6 @@
 from math import exp, fabs
 import numpy as np
+import random
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 import matplotlib.pyplot as plt
@@ -11,9 +12,9 @@ y = []
 
 for i in range(n):        # Заполняем х и у
     try:                  # Проверка на деление на 0
-        fx = exp(i+12)  # Наша формула, для генерации у
-        x.append(i)
-        y.append(fx)
+        fx = i  # Наша формула, для генерации у
+        x.append(random.randint(0,100))
+        y.append(random.randint(0,100))
     except:
         pass
 # Делаем три вида регрессии
